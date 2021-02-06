@@ -1,0 +1,130 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block main %}
+    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-secondary active">
+            <input type="radio" name="options" id="SQradio" autocomplete="off">
+            Single Query
+        </label>
+            <label class="btn btn-secondary">
+            <input type="radio" name="options" id="LQradio" autocomplete="off"> List Query
+        </label>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div id="LQform">
+        <form action="/lquery" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <select autofocus class="form-control" name="LQInstanceOf" id="LQselect">
+                    <option disable selected value="">Category</option>
+                    <option value="Q482994">Albums</option>
+                    <option value="Q154">Alcoholic beverage</option>
+                    <option value="Q811979">Architectural structures</option>
+                    <option value="Q178561">Battles</option>
+                    <option value="Q47461344">Books</option>
+                    <option value="Q146">Cats</option>
+                    <option value="Q1004">Comics</option>
+                    <option value="Q11424">Films</option>
+                    <option value="Q2095">Foods</option>
+                    <option value="Q1107656">Gardens</option>
+                    <option value="Q1048525">Golf courses</option>
+                    <option value="Q1081138">Historic sites</option>
+                    <option value="Q5">Humans</option>
+                    <option value="Q271669">Landforms</option>
+                    <option value="Q3305213">Paintings</option>
+                    <option value="Q7366">Songs</option>
+                    <option value="Q83620">Thoroughfares</option>
+                    <option value="Q15416">TV programs</option>
+                    <option value="Q7889">Video games</option>
+                </select>
+            </div>
+        <div class="form-group">
+            <input name="csvFile" placeholder="File" type="file" id="csvFile" accept=".csv">
+        </div>
+        <button class="btn btn-primary" type="submit">Look up</button>
+        </form>
+    </div>
+    <div id="SQform">
+        <form action="/squery" method="post">
+            <div class="form-group">
+                <select autofocus class="form-control" name="SQInstanceOf" id="SQselect">
+                    <option disable selected value="">Category</option>
+                    <option value="Q482994">Albums</option>
+                    <option value="Q154">Alcoholic beverage</option>
+                    <option value="Q811979">Architectural structures</option>
+                    <option value="Q178561">Battles</option>
+                    <option value="Q47461344">Books</option>
+                    <option value="Q146">Cats</option>
+                    <option value="Q1004">Comics</option>
+                    <option value="Q11424">Films</option>
+                    <option value="Q2095">Foods</option>
+                    <option value="Q1107656">Gardens</option>
+                    <option value="Q1048525">Golf courses</option>
+                    <option value="Q1081138">Historic sites</option>
+                    <option value="Q5">Humans</option>
+                    <option value="Q271669">Landforms</option>
+                    <option value="Q3305213">Paintings</option>
+                    <option value="Q7366">Songs</option>
+                    <option value="Q83620">Thoroughfares</option>
+                    <option value="Q15416">TV programs</option>
+                    <option value="Q7889">Video games</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input name="NameTitle" placeholder="Name or title" type="text" id="NameTitle">
+            </div>
+            <button class="btn btn-primary" type="submit">Look up</button>
+        </form>
+    </div>
+
+    <script>
+
+        if (!document.getElementById('SQradio').checked && !document.getElementById('LQradio').checked) {
+            document.getElementById('SQform').style.display ='none';
+            document.getElementById('LQform').style.display ='none';
+        }
+
+        document.getElementById('SQradio').onchange = function() {
+            document.getElementById('SQform').style.display ='block';
+            document.getElementById('LQform').style.display ='none';
+        };
+
+        document.getElementById('LQradio').onchange = function() {
+            document.getElementById('LQform').style.display ='block';
+            document.getElementById('SQform').style.display ='none';
+        };
+
+
+        if (document.getElementById('SQradio').checked) {
+            document.getElementById('SQform').onsubmit = function() {
+                if (!document.getElementById('SQselect').value) {
+                    alert('You must limit your query by type!');
+                    return false;
+                }
+                else if (!document.getElementById('NameTitle').value) {
+                    alert('You must enter a search!');
+                    return false;
+                }
+            };
+        }
+
+        if (document.getElementById('LQradio').checked) {
+            document.getElementById('LQform').onsubmit = function() {
+                if (!document.getElementById('LQselect').value) {
+                    alert('You must limit your query by type!');
+                    return false;
+                }
+                else if (!document.getElementById('File').value) {
+                    alert('Please supply a list!');
+                    return false;
+                }
+            };
+        }
+
+    </script>
+{% endblock %}

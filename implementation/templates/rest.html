@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Apology
+{% endblock %}
+
+{% block main %}
+    <div>
+        <p>
+            Wow, it turns out that inserting all of the data returned by wikidata into a SQL database
+            takes quite a while. As in, about one minute per item. And you passed a list to it soooo...
+            I've redirected you here so that you can get a cup of coffee or take a walk or something.
+            Frankly, I've been concerned about how much time you've been spending in front of a screen
+            lately anyway.
+        </p>
+        <p>
+            When you come back, you can click the button below.
+        </p>
+    </div>
+    <div>
+        <form action="/stats" method="post">
+            <button class="btn btn-primary" type="submit">Click here</button>
+        </form>
+    </div>
+{% endblock %}

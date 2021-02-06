@@ -1,0 +1,11 @@
+cs50
+csv
+datetime
+flask
+flask_session
+os
+requests
+SPARQLWrapper
+tempfile
+threading
+werkzeug.utils
